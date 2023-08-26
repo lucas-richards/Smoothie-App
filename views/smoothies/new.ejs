@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<h2>Enter information</h2>
+<form action="/smoothies" method="POST">
+  <div class="form-group">
+    <label>Name
+        <input name="name" type="text" class="form-control m-2" required>
+    </label>
+  </div>
+  
+  <div class="form-group">
+    
+    <label>Ingredient
+        <select name="ingredients" class="form-control m-2">
+            <option value="AUS">banana</option>
+            <option value="DFW">apple</option>
+            <option value="DEN">blueberry</option>
+            <option value="LAX">strawberry</option>
+            <option value="SAN">orange</option>
+        </select>
+        <input name="qty" type="text" class="form-control m-2" placeholder="quantity in grams" required>
+    </label>
+    
+  </div>
+  <button type="submit" class="btn btn-primary m-2">Add Smoothie</button>
+</form>
+
+<%- include('../partials/footer') %>
