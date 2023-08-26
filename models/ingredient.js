@@ -22,7 +22,7 @@ const ingredientsSchema = new Schema({
             required: true
         }
     },
-    img: String
+    image: String
 
 }, {
   timestamps: true
