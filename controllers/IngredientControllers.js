@@ -8,9 +8,17 @@ router.get('/', function(req, res) {
     res.render('ingredients/index',{title:'Ingredients', ingredients});
 });
 
+
+
+// new
+
+router.get('/new', function(req, res) {
+    res.render('ingredients/new',{title:'New Ingredient'});
+});
+
 // show
-router.get('/show', function(req, res) {
-    Ingredient.find({_id:req.params.id})
+router.get('/:idIngredient', function(req, res) {
+    Ingredient.find({_id:req.params.idIngredient})
         .then(ingredientDoc => {
             console.log('This is my Ingredient',ingredientDoc)
             res.render('ingredients/show',{title:'Ingredient', ingredient:ingredientDoc});
@@ -22,12 +30,23 @@ router.get('/show', function(req, res) {
         })
 });
 
-// new
 
-router.get('/new', function(req, res) {
-    res.render('ingredients/new',{title:'New Ingredient'});
-});
 // create
+
+router.post('/',function create(req,res){
+    Ingredient.create(req.body)
+        .then(ingredientDoc => {
+            console.log('this is my new ingredient',ingredientDoc)
+            return res.redirect('/ingredients')
+        })
+        .catch(err => {
+            console.log('===err===')
+            console.log(err)
+            console.log('===err===')
+            return res.send('err creating - check terminal')
+        })
+    
+})
 // edit
 // update
 // delete
