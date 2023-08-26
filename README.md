@@ -1,4 +1,4 @@
-## Blog App for westridge Laboratories
+## Smoothies App
 
 ## Overview
 a brief description of your application
