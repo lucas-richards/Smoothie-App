@@ -15,7 +15,7 @@ const methodOverride = require('method-override');
 
 const indexRouter = require('./controllers/index');
 const usersRouter = require('./controllers/userControllers');
-const ingredientsRouter = require('./controllers/ingredientControllers');
+const ingredientsRouter = require('./controllers/ingredientControllers.js');
 const smoothiesRouter = require('./controllers/smoothieControllers');
 
 const app = express();

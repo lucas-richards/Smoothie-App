@@ -33,7 +33,7 @@ const smoothieSchema = new Schema({
     },
     ingredients: [{
         qty: Number,
-        ingredient: {
+        ing: {
             type: Schema.Types.ObjectId,
             ref: 'Ingredient',
             required: true

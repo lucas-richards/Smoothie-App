@@ -3,35 +3,47 @@
 <h2>Enter information</h2>
 <form action="/ingredients" method="POST">
   <div class="form-group mb-3">
-    <label for="input1">Name</label>
-    <input name="name" type="text" class="form-control" placeholder="Ingredient name">
+    <label>Name</label>
+    <input name="name" type="text" class="form-control">
   </div>
   <div class="form-group mb-3">
-    <label for="input1">Calories</label>
-    <input name="nutrients.kcal" type="number" class="form-control" placeholder="KCalories/100grs">
+    <label>Properties</label>
+    <textarea name="properties" class="form-control" aria-label="With textarea"></textarea>
   </div>
+  <div class="form-group mb-3">
+    <label>Serving Size</label>
+    <input name="serving" type="number" class="form-control">
+  </div>
+  
   
   <div class="card">
     <div class="card-header">
         Nutrients
     </div>
     <div class="card-body p-3">
-        <div class="form-group">
-            <label for="input1">Protein</label>
-            <input name="nutrients.protein" type="number" class="form-control" placeholder="Protein/100grs">
+        <div class="form-group mb-2">
+          <label>Calories</label>
+          <input name="kcal" type="number" class="form-control" placeholder="KCalories/100grs">
         </div>
-        <div class="form-group">
-            <label for="input2">Carbohydrates</label>
-            <input name="nutrients.carbs" type="number" class="form-control" placeholder="Carbohydrates/100grs">
+        <div class="form-group mb-2">
+            <label>Protein</label>
+            <input name="protein" type="number" class="form-control" placeholder="Protein/100grs">
         </div>
-        <div class="form-group">
-            <label for="input2">Fat</label>
-            <input name="nutrients.fat" type="name" class="form-control" placeholder="Fat/100grs">
+        <div class="form-group mb-2">
+            <label>Carbohydrates</label>
+            <input name="carbs" type="number" class="form-control" placeholder="Carbohydrates/100grs">
+        </div>
+        <div class="form-group mb-2">
+            <label>Fat</label>
+            <input name="fat" type="Number" class="form-control" placeholder="Fat/100grs">
         </div>
     </div>
   </div>
-  <p>Upload image</p>
-  <button type="submit" class="btn btn-primary m-2">Add Ingredient</button>
+  <div class="form-group mt-2">
+    <label>Image</label>
+    <input name="image" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary m-2">Save Ingredient</button>
 </form>
 
 <%- include('../partials/footer') %>

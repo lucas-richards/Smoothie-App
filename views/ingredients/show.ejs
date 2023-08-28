@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<div class="buttons">
+  <a href="/ingredients/<%= ingredient.id %>/edit"" class="btn btn-secondary btn-sm">Edit</a>
+  <a href="/ingredients/new" class="btn btn-danger btn-sm">Delete</a>  
+</div>
+
+
+<h1><%= ingredient.name %></h1>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col m-4">
+      <h4><%= ingredient.kcal %> Cal</h4>
+      <% if (ingredient.image) { %>
+        <img id="img-ing" src="<%= ingredient.image %>" alt="ingredient image">
+      <% } else { %>
+        <img id="img-ing" src="/images/comingsoon.jpeg" alt="ingredient image">
+      <% } %>
+      
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= ingredient.protein/total*100 %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-warning" role="progressbar" style="width: <%= ingredient.carbs/total*100 %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: <%= ingredient.fat/total*100 %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <ul class="list-pcf mt-3">
+        <li class="m-1">Protein: <%= ingredient.protein %></li>
+        <li class="m-1">Carbs: <%= ingredient.carbs %></li>
+        <li class="m-1">Fat: <%= ingredient.fat %></li>
+      </ul>
+    </div>
+    <div class="col m-4">
+      <h5>Properties</h5>
+      <p><%= ingredient.properties %></p>
+    </div>
+  </div>
+  <h4 class="mt-3">These are the smoothies using <%= ingredient.name %></h4>
+</div>
+
+
+
+
+  
+
+<%- include('../partials/footer') %>

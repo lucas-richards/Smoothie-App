@@ -22,5 +22,38 @@ footer {
 }
 
 a > img {
-  height: 18px;
+  height: 45px;
 }
+
+#img-ing {
+  height: 270px;
+}
+
+.list-pcf{
+  list-style: none
+}
+
+.list-pcf > li::before{
+  content: "\2022";
+  width: 25px;
+  margin-left: -1em;
+  padding: 7px;
+  /* color: blue; */
+}
+
+.list-pcf > li:first-child::before {
+  color: blue;
+}
+
+.list-pcf > li:nth-child(n+2)::before {
+  color: rgb(227, 116, 25);
+}
+
+.list-pcf > li:last-child::before {
+  color: rgb(240, 44, 4);
+}
+
+.buttons {
+  text-align: end;
+}
+
