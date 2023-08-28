@@ -3,8 +3,7 @@
 ## Overview
 a brief description of your application
 
-<img src="url to your image on imgur">
-<img src="url to your image on imgur">
+![alt text](public/images/wireframes/index_smoothie.png)
 
 ## User Stories
 a detailed list of the functionality of your application, told through a user's perspective
