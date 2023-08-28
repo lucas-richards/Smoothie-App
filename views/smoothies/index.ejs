@@ -3,6 +3,15 @@
   
   <p>Welcome to <%= title %></p>
   <p>This is where I render all my smoothies <%= title %></p>
+  
+  <% smoothies.forEach( s => { %>
+    <ul>
+      <li>
+        <a href="/smoothies/<%= s.id  %>"><%= s.name %></a>
+      </li>
+    </ul>
+  <% }) %>
+
   <a href="/smoothies/new">New Smoothie</a>
 
 <%- include('../partials/footer') %>

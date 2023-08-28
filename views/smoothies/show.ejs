@@ -1,6 +1,18 @@
-<section id="show-page">
-    <div><%= smoothie.name %></div>
-    <div><%= smoothie.user %></div>
-    <div><%= smoothie.ingredients %></div>
-    <div><%= smoothie.reviews %></div>
-</section>
+
+<%- include('../partials/header') %>
+<div class="buttons">
+  <a href="/smoothies/edit"" class="btn btn-secondary btn-sm">Edit</a>
+  <a href="/smoothies/new" class="btn btn-danger btn-sm">Delete</a>  
+</div>
+
+
+<h1><%= smoothie %></h1>
+
+
+
+
+
+
+  
+
+<%- include('../partials/footer') %>
