@@ -82,8 +82,18 @@ SECRET=
 
 
 ## Wireframes / Screenshots
-diagrams that display what your application will look like, and images from the completed app.
-![alt text](media/wireframes.png)
+
+### Ingredients Wireframes
+![alt text](public/images/wireframes/index_ing.png)
+![alt text](public/images/wireframes/show_ing.png)
+![alt text](public/images/wireframes/new_ing.png)
+
+### Smoothies Wireframes
+![alt text](public/images/wireframes/index_smoothie.png)
+![alt text](public/images/wireframes/show_smoothie.png)
+![alt text](public/images/wireframes/new_smoothie.png)
+
+
 ## Entity Relationship Diagrams
 diagrams that describe the relationships between your resources
 ![alt text](public/images/ERD.png)
