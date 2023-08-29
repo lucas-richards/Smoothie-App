@@ -3,8 +3,14 @@ const router = express.Router();
 const Smoothie = require('../models/smoothie');
 const Ingredient = require('../models/ingredient');
 
+let ingArr = []
+let ingArrEdit = []
+
 // index
 router.get('/', function(req, res) {
+    //reset edit array smoothie
+    ingArrEdit = []
+    console.log('reset ingArrEdit')
     Smoothie.find({})
         .then(smoothieDocs => {
             res.render('smoothies/index',{title:'Smoothies', smoothies:smoothieDocs});
@@ -17,7 +23,7 @@ router.get('/', function(req, res) {
     
 });
 
-let ingArr = []
+
 
 router.post('/new', function(req,res) {
     const newIng = {}
@@ -84,8 +90,7 @@ router.get('/:smoothieId', function(req, res) {
 // create
 
 router.post('/', function(req, res) {
-    //reset edit array smoothie
-    ingArrEdit = []
+    
     req.body.user = req.user._id
     console.log('this is my body',req.body)
     Smoothie.create(req.body)
@@ -105,7 +110,6 @@ router.post('/', function(req, res) {
 })
 
 // edit
-let ingArrEdit = []
 
 router.get('/:smoothieId/edit', function(req,res){
     Smoothie.findById(req.params.smoothieId).populate('ingredients.ing').exec()
@@ -152,14 +156,22 @@ router.patch('/:smoothieId/edit', function(req,res){
         })
 })
 
+// EDIT PAGE - delete ingredient
+router.delete('/:smoothieId/edit/:ingArrEditIdx', function(req,res){
+    console.log('old ingArrEdit', ingArrEdit)
+    ingArrEdit.splice(req.params.ingArrEditIdx,1)
+    console.log('new ingArrEdit', ingArrEdit)
+    res.redirect(`/smoothies/${req.params.smoothieId}/edit`)
+})
+
 // update smoothie
 router.patch('/:smoothieId', function(req, res) {
     console.log('this is my req.body',req.body)
     Smoothie.findById(req.params.smoothieId)
         .then(smoothieDoc => {
-            console.log('this is my smoothieDoc',smoothieDoc)
             if (req.user && smoothieDoc.user == req.user.id) {
                 smoothieDoc.ingredients = ingArrEdit
+                console.log('this is my smoothieDoc after reset',smoothieDoc)
                 ingArrEdit = []
                 smoothieDoc.save()
                 return smoothieDoc.updateOne(req.body)
@@ -170,7 +182,7 @@ router.patch('/:smoothieId', function(req, res) {
         .then(data => {
             console.log('what is returned from updateOne', data)
 
-            res.redirect(`/smoothies`)
+            res.redirect(`/smoothies/${req.params.smoothieId}`)
         })
         .catch(error => console.error)
 });

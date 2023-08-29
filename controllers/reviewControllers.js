@@ -4,18 +4,22 @@ const Smoothie = require('../models/smoothie');
 
 module.exports = router
 
-// router.delete deleteReview(req, res) {
-//   // Note the cool "dot" syntax to query on the property of a subdoc
-//   const movie = await Movie.findOne({ 'reviews._id': req.params.id, 'reviews.user': req.user._id });
-//   // Rogue user!
-//   if (!movie) return res.redirect('/movies');
-//   // Remove the review using the remove method available on Mongoose arrays
-//   movie.reviews.remove(req.params.id);
-//   // Save the updated movie doc
-//   await movie.save();
-//   // Redirect back to the movie's show view
-//   res.redirect(`/movies/${movie._id}`);
-// }
+router.delete('/reviews/:reviewId',function(req, res) {
+    // Note the cool "dot" syntax to query on the property of a subdoc
+    console.log('delete route was hit')
+    Smoothie.findOne({ 'reviews._id': req.params.reviewId, 'reviews.user': req.user._id })
+        .then(smoothieDoc => {
+            // Remove the review using the remove method available on Mongoose arrays
+            console.log('this is smoothieDococ',smoothieDoc)
+            smoothieDoc.reviews.remove(req.params.reviewId);
+            smoothieDoc.save();
+            res.redirect(`/smoothies/${smoothieDoc._id}`);
+        })
+        .catch (err => {
+            console.log(err);
+        })
+    
+})
 
 router.post('/smoothies/:smoothieId/reviews', function (req, res) {
     // Add the user-centric info to req.body (the new review)

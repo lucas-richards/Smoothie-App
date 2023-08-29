@@ -29,10 +29,11 @@
             <th>protein</th>
             <th>carbs</th>
             <th>fat</th>
+            <th></th>
         </thead>
         <tbody>
           <% if(ingArrEdit.length !== 0){ %>
-            <% ingArrEdit.forEach(ing => { %>
+            <% ingArrEdit.forEach((ing,ingIdx) => { %>
                 <tr>
                     <td><%= ing.ing.name %></td> 
                     <td><%= ing.qty %></td> 
@@ -40,7 +41,11 @@
                     <td><%= ing.ing.protein %></td> 
                     <td><%= ing.ing.carbs %></td> 
                     <td><%= ing.ing.fat %></td> 
-                    <td><a href="/smoothies/">X</a></td>
+                    <td>
+                      <form action="/smoothies/<%= smoothie.id %>/edit/<%= ingIdx %>?_method=DELETE" method="POST" >
+                        <button type="submit">X</button>
+                      </form>
+                    </td>
                 </tr>
                 
             <% }) %>
