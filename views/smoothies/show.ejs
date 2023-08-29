@@ -1,7 +1,7 @@
 
 <%- include('../partials/header') %>
 <div class="buttons">
-  <a href="/smoothies/edit"" class="btn btn-secondary btn-sm">Edit</a>
+  <a href="/smoothies/<%= smoothie.id  %>/edit" class="btn btn-secondary btn-sm">Edit</a>
   <a href="/smoothies/new" class="btn btn-danger btn-sm">Delete</a>  
 </div>
 
@@ -89,7 +89,7 @@
       <% }); %>
     
 <% } else { %>
-  <h5>No Reviews Yet</h5>
+  <p>No Reviews Yet</p>
 <% } %>
 <form id="add-review-form" method="POST"
   action="/smoothies/<%= smoothie._id %>/reviews">

@@ -4,34 +4,67 @@
   <div class="row">
     <div class="col m-4">
       <h2>Enter information</h2>
-      <form action="/smoothies" method="POST">
-        <div class="form-group">
-          <label>Name
-              <input name="name" type="text" class="form-control m-2" required>
-          </label>
-        </div>
+      <form action="/smoothies/new" method="post">
+        
         <div class="form-group">
           <label>Ingredient
-            <select name="ingredients.0.ing" class="form-control m-2">
+            <select name="ing" class="form-control m-2">
               <!-- Emit an option for each performer -->
               <%- ingredients.map(ing => 
                 `<option value="${ing._id}">${ing.name}</option>`
               ).join('') %>
             </select>
-              <input name="ingredients.0.qty" type="text" class="form-control m-2" placeholder="quantity in grams" required>
+              <input name="qty" type="text" class="form-control m-2" placeholder="quantity in grams" required>
           </label>
         </div>
-        <div class="form-group">
-          <label>Image
-              <input name="image" type="text" class="form-control m-2">
-          </label>
-        </div>
-        <button type="submit" class="btn btn-success m-2">Add Ingredient</button>
+        <button type="submit" class="btn btn-success btn-sm m-2">Add Ingredient</button>
+        
       </form>
     </div>
     <div class="col m-4">
-      
+      <h4>These are the ingredients</h4>
+      <table class="table">
+        <thead>
+            <th>name</th>
+            <th>qty</th>
+            <th>kcal</th>
+            <th>protein</th>
+            <th>carbs</th>
+            <th>fat</th>
+        </thead> 
+        <tbody>
+          <% if(ingArr.length){ %>
+            <% ingArr.forEach(ing => { %>
+                <tr>
+                    <td><%= ing.ing.name %></td> 
+                    <td><%= ing.qty %></td> 
+                    <td><%= ing.ing.kcal %></td> 
+                    <td><%= ing.ing.protein %></td> 
+                    <td><%= ing.ing.carbs %></td> 
+                    <td><%= ing.ing.fat %></td> 
+                    <td><a href="/smoothies/">X</a></td>
+                </tr>
+                
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
     </div>
+    <% if(ingArr.length !== 0) {%>
+    <form action="/smoothies" method="post">
+      <div class="form-group">
+        <label>Name
+            <input name="name" type="text" class="form-control m-2" required>
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Image
+            <input name="image" type="text" class="form-control m-2">
+        </label>
+      </div>
+        <button type="submit" class="btn btn-primary m-2">Save Smoothie</button>
+    </form>
+    <% }%>
   </div>
 </div>
 

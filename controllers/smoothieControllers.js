@@ -17,14 +17,31 @@ router.get('/', function(req, res) {
     
 });
 
+let ingArr = []
+
+router.post('/new', function(req,res) {
+    const newIng = {}
+    newIng.qty = req.body.qty 
+    Ingredient.findById(req.body.ing)
+        .then( ingredientDoc => {
+            newIng.ing = ingredientDoc
+            ingArr.push(newIng)
+            console.log('ingArr',ingArr)
+            res.redirect('/smoothies/new')
+        })
+        .catch(err => {
+            console.log('==============err==================')
+            console.log(err)
+            return res.send('err creating - check terminal')
+        })
+})
 
 
 // new
-
 router.get('/new', function(req, res) {
     Ingredient.find({}).sort('name')
     .then((ingredientDoc)=>{
-        res.render('smoothies/new',{title:'New Smoothie', ingredients:ingredientDoc});
+        res.render('smoothies/new',{title:'New Smoothie', ingredients:ingredientDoc, ingArr});
     })
     .catch(err => {
         console.log('==============err==================')
@@ -47,7 +64,6 @@ router.get('/:smoothieId', function(req, res) {
                 totalC += ing.ing.carbs
                 totalF += ing.ing.fat
             })
-            console.log('This is my smoothie ing',smoothieDoc)
             res.render('smoothies/show',{
                 title:'', 
                 smoothie:smoothieDoc, 
@@ -68,12 +84,17 @@ router.get('/:smoothieId', function(req, res) {
 // create
 
 router.post('/', function(req, res) {
+    //reset edit array smoothie
+    ingArrEdit = []
     req.body.user = req.user._id
     console.log('this is my body',req.body)
     Smoothie.create(req.body)
         .then(smoothieDoc => {
-            console.log('this is my new smoothie',smoothieDoc)
+            ingArr.forEach((ing) => {
+                smoothieDoc.ingredients.push(ing)
+            })
             smoothieDoc.save();
+            ingArr = []
             res.redirect(`/smoothies`)
         })
         .catch(err => {
@@ -82,12 +103,30 @@ router.post('/', function(req, res) {
             return res.send('err creating - check terminal')
         })
 })
+
 // edit
+let ingArrEdit = []
 
 router.get('/:smoothieId/edit', function(req,res){
-    Smoothie.findById(req.body.smoothieId)
+    Smoothie.findById(req.params.smoothieId).populate('ingredients.ing').exec()
         .then(smoothieDoc => {
-            res.render(`smoothies/${smoothieDoc._id}`)
+            //if ingArrEdit is empty then assign the smoothie.ing value
+            if(ingArrEdit.length === 0)ingArrEdit = smoothieDoc.ingredients
+            Ingredient.find({})
+                .then(ingredientDocs => {
+                    console.log('this is my smoothie to be updated',smoothieDoc)
+                    res.render('smoothies/edit',{
+                        title:'Edit Smoothie',
+                        smoothie: smoothieDoc,
+                        ingredients: ingredientDocs,
+                        ingArrEdit
+                    })
+                })
+                .catch(err => {
+                    console.log('==============err==================')
+                    console.log(err)
+                    return res.send('err creating - check terminal')
+                })
         })
         .catch(err => {
             console.log('==============err==================')
@@ -95,7 +134,46 @@ router.get('/:smoothieId/edit', function(req,res){
             return res.send('err creating - check terminal')
         })
 })
-// update
+
+//update edit page to show the new ingredient 
+router.patch('/:smoothieId/edit', function(req,res){
+    Ingredient.findById(req.body.ing)
+        .then( ingredientDoc => {
+            const newIng = {}
+            newIng.qty = req.body.qty 
+            newIng.ing = ingredientDoc
+            ingArrEdit.push(newIng)
+            res.redirect(`/smoothies/${req.params.smoothieId}/edit`)
+        })
+        .catch(err => {
+            console.log('==============err==================')
+            console.log(err)
+            return res.send('err creating - check terminal')
+        })
+})
+
+// update smoothie
+router.patch('/:smoothieId', function(req, res) {
+    console.log('this is my req.body',req.body)
+    Smoothie.findById(req.params.smoothieId)
+        .then(smoothieDoc => {
+            console.log('this is my smoothieDoc',smoothieDoc)
+            if (req.user && smoothieDoc.user == req.user.id) {
+                smoothieDoc.ingredients = ingArrEdit
+                ingArrEdit = []
+                smoothieDoc.save()
+                return smoothieDoc.updateOne(req.body)
+            } else {
+                res.send('something went wrong')
+            }
+        })
+        .then(data => {
+            console.log('what is returned from updateOne', data)
+
+            res.redirect(`/smoothies`)
+        })
+        .catch(error => console.error)
+});
 // delete
 
 
