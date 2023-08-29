@@ -35,10 +35,27 @@ router.get('/new', function(req, res) {
 
 // show
 router.get('/:smoothieId', function(req, res) {
-    Smoothie.findById(req.params.smoothieId)
+    Smoothie.findById(req.params.smoothieId).populate('ingredients.ing').populate('user').exec()
         .then(smoothieDoc => {
-            console.log('This is my smoothie',smoothieDoc)
-            res.render('smoothies/show',{title:'', smoothie:smoothieDoc});
+            let totalKcal = 0
+            let totalP = 0
+            let totalC = 0
+            let totalF = 0
+            smoothieDoc.ingredients.forEach(ing => {
+                totalKcal += ing.ing.kcal
+                totalP += ing.ing.protein
+                totalC += ing.ing.carbs
+                totalF += ing.ing.fat
+            })
+            console.log('This is my smoothie ing',smoothieDoc)
+            res.render('smoothies/show',{
+                title:'', 
+                smoothie:smoothieDoc, 
+                totalKcal,
+                totalP,
+                totalC,
+                totalF
+            });
         })
         .catch(err => {
             console.log('==============err==================')
@@ -52,11 +69,10 @@ router.get('/:smoothieId', function(req, res) {
 
 router.post('/', function(req, res) {
     req.body.user = req.user._id
-    const ingredient = {qty: req.body.qty, ing: req.body.ing}
+    console.log('this is my body',req.body)
     Smoothie.create(req.body)
         .then(smoothieDoc => {
             console.log('this is my new smoothie',smoothieDoc)
-            smoothieDoc.ingredients.push(ingredient);
             smoothieDoc.save();
             res.redirect(`/smoothies`)
         })

@@ -12,13 +12,13 @@
         </div>
         <div class="form-group">
           <label>Ingredient
-            <select name="ingredients.ing" class="form-control m-2">
+            <select name="ingredients.0.ing" class="form-control m-2">
               <!-- Emit an option for each performer -->
               <%- ingredients.map(ing => 
                 `<option value="${ing._id}">${ing.name}</option>`
               ).join('') %>
             </select>
-              <input name="ingredients.qty" type="text" class="form-control m-2" placeholder="quantity in grams" required>
+              <input name="ingredients.0.qty" type="text" class="form-control m-2" placeholder="quantity in grams" required>
           </label>
         </div>
         <div class="form-group">

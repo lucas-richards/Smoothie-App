@@ -12,23 +12,14 @@
 <div class="container">
   <div class="row">
     <div class="col m-4">
-      <h4><%= smoothie.name %> Cal</h4>
+      <h4><%= totalKcal %> Cal</h4>
       <% if (smoothie.image) { %>
         <img id="img-ing" src="<%= smoothie.image %>" alt="ingredient image">
       <% } else { %>
         <img id="img-ing" src="/images/comingsoon.jpeg" alt="ingredient image">
       <% } %>
-<!-- The error is here inside the syles -->
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-        <div class="progress-bar bg-warning" role="progressbar" style="width: 33%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-        <div class="progress-bar bg-danger" role="progressbar" style="width: 33%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      <ul class="list-pcf mt-3">
-        <li class="m-1">Protein: <%= smoothie.name %></li>
-        <li class="m-1">Carbs: <%= smoothie.name %></li>
-        <li class="m-1">Fat: <%= smoothie.name %></li>
-      </ul>
+
+      
     </div>
     <div class="col m-4">
       <h5>Ingredients</h5>
@@ -51,35 +42,69 @@
                     <td><%= ing.ing.protein %></td> 
                     <td><%= ing.ing.carbs %></td> 
                     <td><%= ing.ing.fat %></td> 
-                    <td><a href="/smoothies/<%= smoothie.id %>">X</a></td>
                 </tr>
                 
             <% }) %>
           <% } %>
         </tbody>
       </table>
+      <% 
+        const total = totalP + totalC + totalF 
+        const protPerc = Math.ceil(totalP/total*100)
+        const carbPerc = Math.ceil(totalC/total*100)
+        const fatPerc = Math.ceil(totalF/total*100)
+      %>
+      <!-- The error is here inside the syles -->
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: <%= protPerc %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-warning" role="progressbar" style="width: <%= carbPerc %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: <%= fatPerc %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <ul class="list-pcf mt-3">
+            <li class="m-1">Protein: <%= protPerc %> %</li>
+            <li class="m-1">Carbs: <%= carbPerc %> %</li>
+            <li class="m-1">Fat: <%= fatPerc %> %</li>
+        </ul>
     </div>
   </div>
-  <h4 class="mt-3">These are the smoothies reviews </h4>
 </div>
-<% if(smoothie.ingredients.length !== 0){ %>
-    <% smoothie.ingredients.forEach(ing => { %>
-        <tr>
-            <td><%= ing.ing.name %></td> 
-            <td><%= ing.qty %></td> 
-            <td><%= ing.ing.kcal %></td> 
-            <td><%= ing.ing.protein %></td> 
-            <td><%= ing.ing.carbs %></td> 
-            <td><%= ing.ing.fat %></td> 
-            <td><a href="/smoothies/<%= smoothie.id %>">X</a></td>
-        </tr>
-        
-    <% }) %>
-  <% } %>
+<h2>Reviews</h2>
 
-
-
-
+<% if (smoothie.reviews.length) { %>
+      <% let total = 0 %>
+      <% smoothie.reviews.forEach(function(r) { %>
+        <% total += r.rating %>
+            <div class="shadow p-3 m-3 bg-body rounded">
+              <% if (user?._id.equals(r.user)) { %>
+                <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST" >
+                  <button class="float-right" type="submit">X</button>
+                </form>
+              <% } %>
+              <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" >
+              <%= r.userName %>
+               - Rating: <%= r.rating %>
+              <div><%= r.content %></div>
+            </div>
+            
+      <% }); %>
+    
+<% } else { %>
+  <h5>No Reviews Yet</h5>
+<% } %>
+<form id="add-review-form" method="POST"
+  action="/smoothies/<%= smoothie._id %>/reviews">
+  <label>Review:</label>
+  <textarea name="content"></textarea>
+  <label>Rating:</label>
+  <select name="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5" selected>5</option>
+  </select>
+  <input type="submit" value="Add Review">
+</form>
 
   
 

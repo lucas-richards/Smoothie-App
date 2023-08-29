@@ -17,6 +17,7 @@ const indexRouter = require('./controllers/index');
 const usersRouter = require('./controllers/userControllers');
 const ingredientsRouter = require('./controllers/ingredientControllers.js');
 const smoothiesRouter = require('./controllers/smoothieControllers');
+const reviewsRouter = require('./controllers/reviewControllers');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/ingredients', ingredientsRouter);
 app.use('/smoothies', smoothiesRouter);
+app.use('/', reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
