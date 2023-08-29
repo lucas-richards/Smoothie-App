@@ -39,7 +39,7 @@ const smoothieSchema = new Schema({
             required: true
         }
     }],
-    comments: [reviewSchema],
+    reviews: [reviewSchema],
     image:String
     
     }, {

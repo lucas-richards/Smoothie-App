@@ -38,7 +38,7 @@ router.get('/:smoothieId', function(req, res) {
     Smoothie.findById(req.params.smoothieId)
         .then(smoothieDoc => {
             console.log('This is my smoothie',smoothieDoc)
-            res.render('smoothies/show',{title:'Smoothie', smoothie:smoothieDoc});
+            res.render('smoothies/show',{title:'', smoothie:smoothieDoc});
         })
         .catch(err => {
             console.log('==============err==================')
@@ -52,9 +52,12 @@ router.get('/:smoothieId', function(req, res) {
 
 router.post('/', function(req, res) {
     req.body.user = req.user._id
+    const ingredient = {qty: req.body.qty, ing: req.body.ing}
     Smoothie.create(req.body)
         .then(smoothieDoc => {
             console.log('this is my new smoothie',smoothieDoc)
+            smoothieDoc.ingredients.push(ingredient);
+            smoothieDoc.save();
             res.redirect(`/smoothies`)
         })
         .catch(err => {

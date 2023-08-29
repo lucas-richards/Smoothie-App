@@ -37,8 +37,8 @@
             <th>fat</th>
         </thead>
         <tbody>
-          <% if(smoothie.ing.length !== 0){ %>
-            <% smoothie.ingredient.forEach(ing => { %>
+          <% if(smoothie.ingredients.length !== 0){ %>
+            <% smoothie.ingredients.forEach(ing => { %>
                 <tr>
                     <td><%= ing.ing.name %></td> 
                     <td><%= ing.qty %></td> 
@@ -52,7 +52,7 @@
             <% }) %>
           <% } %>
         </tbody>
-    </table>
+      </table>
     </div>
   </div>
 </div>
