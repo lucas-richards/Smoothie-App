@@ -1,16 +1,25 @@
 <%- include('../partials/header') %>
 
   
-  <p>Welcome to <%= title %></p>
-  <p>This is where I render all my smoothies <%= title %></p>
+<p>Welcome to <%= title %></p>
+<p>This is where I render all my smoothies <%= title %></p>
   
+<div class="d-flex flex-wrap">
   <% smoothies.forEach( s => { %>
-    <ul>
-      <li>
-        <a href="/smoothies/<%= s.id  %>"><%= s.name %></a>
-      </li>
-    </ul>
+    <a href="/smoothies/<%= s.id  %>">
+    <div id="items-cont" class="shadow p-3 m-3 bg-body rounded">
+        <h3><%= s.name %></h3>
+        <small><%= s.user.name %></small><br>
+        <% if (s.image) { %>
+          <img src="<%= s.image %>" alt="item image" class="rounded mx-auto d-block">
+        <% } else { %>
+          <img src="/images/comingsoon.jpeg" alt="comingsoon image">
+        <% } %>
+      
+    </div>
+    </a>
   <% }) %>
+</div>
 
 <!-- Add a new smoothie -->
 <a href="/smoothies/new" class="btn btn-primary m-2">New Smoothie</a>

@@ -63,3 +63,28 @@ header {
   margin-bottom: 40px;
 }
 
+/* start for items in index */
+#items-cont {
+  width: 250px;
+  height: 300px;
+  transition: scale 0.5s;
+  color: black;
+  text-align: center;
+  
+}
+
+#items-cont:hover {
+  scale: 1.05;
+}
+
+#items-cont > img {
+  height: 70%;
+  width: 80%;
+}
+
+.flex-wrap > a {
+  text-decoration: none;
+}
+
+/* end for items in index */
+
