@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const Ingredient = require('../models/ingredient');
+const checkLogin = require('../config/ensureLoggedIn')
+const axios = require('axios')
 
-const ROOT_URL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}&ingr=banana&nutrition-type=cooking`
-
+const ROOT_URL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`
+let ingData = null
 
 
 // index
 router.get('/', function(req, res) {
+    
     Ingredient.find({})
         .then(nutrientsDocs => {
-            res.render('ingredients/index', {title:'Ingredients', ingredients: nutrientsDocs})
+            res.render('ingredients/index', {
+                title:'Ingredients',
+                ingredients: nutrientsDocs,
+            })
         })
         .catch(err => {
             console.log('==============err==================')
@@ -20,8 +26,28 @@ router.get('/', function(req, res) {
 
 });
 
+// Search bar for new item 
+router.get('/new-option', function(req, res) {
+    res.render('ingredients/new-option',{title:'Select an option', ingData:''});
+});
+
+// Fetch data from search bar
+router.post('/new-option', checkLogin, async function(req, res) {
+    console.log('route hit search')
+    ingData = await fetch(`${ROOT_URL}&ingr=${req.body.ing}&nutrition-type=cooking`)
+        .then(res => res.json())
+        
+    res.render('ingredients/new-option',{title:'Select an option', ingData});
+});
+
+// Search bar for new item 
+router.get('/new-search', function(req, res) {
+    res.render('ingredients/new-search',{title:'Confirm data', ingData});
+});
+
+
 // new
-router.get('/new', function(req, res) {
+router.get('/new', checkLogin, function(req, res) {
     res.render('ingredients/new',{title:'New Ingredient'});
 });
 
@@ -29,7 +55,6 @@ router.get('/new', function(req, res) {
 router.get('/:idIngredient', function(req, res) {
     Ingredient.findById(req.params.idIngredient)
         .then(ingredientDoc => {
-            console.log('This is my Ingredient',ingredientDoc)
             const total = ingredientDoc.protein + ingredientDoc.carbs + ingredientDoc.fat
             res.render('ingredients/show',{title:'', ingredient:ingredientDoc, total});
         })
@@ -43,7 +68,7 @@ router.get('/:idIngredient', function(req, res) {
 
 // create
 
-router.post('/',function create(req,res){
+router.post('/', checkLogin, function create(req,res){
     req.body.user = req.user._id
     Ingredient.create(req.body)
         .then(ingredientDoc => {
@@ -59,7 +84,7 @@ router.post('/',function create(req,res){
 })
 // edit
 
-router.get('/:idIngredient/edit', function(req, res) {
+router.get('/:idIngredient/edit', checkLogin, function(req, res) {
     Ingredient.findById(req.params.idIngredient)
         .then(ingredientDoc => {
             res.render('ingredients/edit',{title:'', ingredient:ingredientDoc});
@@ -73,7 +98,7 @@ router.get('/:idIngredient/edit', function(req, res) {
 
 // update
 
-router.patch('/:idIngredient', function(req, res) {
+router.patch('/:idIngredient', checkLogin, function(req, res) {
     Ingredient.findById(req.params.idIngredient)
         .then(ingredientDoc => {
             if (req.user && ingredientDoc.user == req.user.id) {
@@ -85,7 +110,7 @@ router.patch('/:idIngredient', function(req, res) {
         .then(data => {
             console.log('what is returned from updateOne', data)
 
-            res.redirect(`/ingredients`)
+            res.redirect(`/ingredients/${req.params.idIngredient}`)
         })
         .catch(error => console.error)
 });

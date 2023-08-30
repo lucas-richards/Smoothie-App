@@ -50,22 +50,32 @@
         </tbody>
       </table>
     </div>
-    <% if(ingArr.length !== 0) {%>
-    <form action="/smoothies" method="post">
-      <div class="form-group">
-        <label>Name
-            <input name="name" type="text" class="form-control m-2" required>
-        </label>
-      </div>
-      <div class="form-group">
-        <label>Image
-            <input name="image" type="text" class="form-control m-2">
-        </label>
-      </div>
-        <button type="submit" class="btn btn-primary m-2">Save Smoothie</button>
-    </form>
-    <% }%>
+    
   </div>
 </div>
+
+<% if(ingArr.length !== 0) {%>
+  <div class="container">
+    <div class="row">
+      <div class="col m-4">
+        <h2>Enter information</h2>
+          <form action="/smoothies" method="post">
+            <div class="form-group">
+              <label>Name
+                  <input name="name" type="text" class="form-control m-2" required>
+              </label>
+            </div>
+            <div class="form-group">
+              <label>Image
+                  <input name="image" type="text" class="form-control m-2">
+              </label>
+            </div>
+              <button type="submit" class="btn btn-primary m-2">Save Smoothie</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% }%>
 
 <%- include('../partials/footer') %>

@@ -1,0 +1,59 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-7 m-4 text-center">
+      <h3>Option 1</h3>
+      <h4>Search for Ingredient</h4>
+      <form action="/ingredients/new-option" method="post" class="form-inline">
+        <input name="ing" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      <% if(ingData) {%>
+        <div class="d-flex flex-wrap justify-content-center">
+          <% ingData.hints.forEach((ing,ingIdx) => {%>
+            <a href="/ingredients/new-search">
+              <div id="items-cont" class="shadow p-3 m-3 bg-body rounded">
+                <h3 class="text-truncate"><%= ing.food.label %></h3>
+                <h6 class="d-inline"><%= Math.ceil(ing.food.nutrients.ENERC_KCAL) %> Cal</h6><small> (100g)</small>
+                <br>
+                <% if (ing.food.image) { %>
+                  <img src="<%= ing.food.image %>" alt="item image" class="rounded mx-auto d-block">
+                <% } else { %>
+                  <img src="/images/comingsoon.jpeg" alt="comingsoon image">
+                <% } %>
+                <% 
+                  let totalP = ing.food.nutrients.PROCNT
+                  let totalC = ing.food.nutrients.CHOCDF
+                  let totalF = ing.food.nutrients.FAT
+                  
+                  const total = totalP + totalC + totalF 
+                  const protPerc = Math.ceil(totalP/total*100)
+                  const carbPerc = Math.ceil(totalC/total*100)
+                  const fatPerc = Math.ceil(totalF/total*100)
+                %>
+                
+                <div class="progress mt-2">
+                  <div class="progress-bar" role="progressbar" style="width: <%= protPerc %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: <%= carbPerc %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: <%= fatPerc %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </a>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+    <div class="col m-4 text-center">
+      <h3>Option 2</h3>
+      <h4>Enter information Manually</h4>
+      <a href="/ingredients/new">Enter Info</a>
+    </div>
+  </div>
+</div>
+  
+
+
+  
+
+<%- include('../partials/footer') %>
