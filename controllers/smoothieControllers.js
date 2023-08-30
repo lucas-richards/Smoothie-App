@@ -65,11 +65,15 @@ router.get('/:smoothieId', function(req, res) {
             let totalP = 0
             let totalC = 0
             let totalF = 0
+            let totalRating = 0
             smoothieDoc.ingredients.forEach(ing => {
                 totalKcal += ing.ing.kcal
                 totalP += ing.ing.protein
                 totalC += ing.ing.carbs
                 totalF += ing.ing.fat
+            })
+            smoothieDoc.reviews.forEach(rev => {
+                totalRating += rev.rating
             })
             res.render('smoothies/show',{
                 title:'', 
@@ -77,7 +81,8 @@ router.get('/:smoothieId', function(req, res) {
                 totalKcal,
                 totalP,
                 totalC,
-                totalF
+                totalF,
+                totalRating
             });
         })
         .catch(err => {

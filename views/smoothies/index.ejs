@@ -2,7 +2,7 @@
 
 
 
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap justify-content-center">
   <% smoothies.forEach( s => { %>
     <a href="/smoothies/<%= s.id  %>">
     <div id="items-cont" class="shadow p-3 m-3 bg-body rounded">
@@ -19,7 +19,13 @@
             s.reviews.forEach(function(r) { 
             totalRating += r.rating 
           })%>
-          <h5>Rating: <%= Math.round(totalRating/s.reviews.length*10)/10 %></h5>
+          <h6>
+             <!-- if rating number needed Math.round(totalRating/s.reviews.length*10)/10  -->
+            <% for(let i=0; i < Math.round(totalRating/s.reviews.length); i++){ %>
+              <img id="starImg" src="/images/star.png" alt="star">
+            <% } %>
+          </h6>
+          
         <% } else {%>
           <h5>No reviews</h5>
         <% } %>

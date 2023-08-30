@@ -21,15 +21,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="col m-4">
+    <div class="col m-4 text-center">
       <h4><%= totalKcal %> Cal</h4>
       <% if (smoothie.image) { %>
         <img id="img-ing" src="<%= smoothie.image %>" alt="ingredient image">
       <% } else { %>
         <img id="img-ing" src="/images/comingsoon.jpeg" alt="ingredient image">
       <% } %>
-
-      
     </div>
     <div class="col m-4">
       <h5>Ingredients</h5>
@@ -79,9 +77,18 @@
   </div>
 </div>
 <hr>
-<h2>Reviews</h2>
+<h2>
+  Reviews
+  
+</h2>
 
 <% if (smoothie.reviews.length) { %>
+  <h5>
+    <%= Math.round(totalRating/smoothie.reviews.length*10)/10 %>
+    <% for(let i=0; i < Math.round(totalRating/smoothie.reviews.length); i++){ %>
+      <img id="starImg" src="/images/star.png" alt="star">
+    <% } %>
+  </h5>
       <% let total = 0 %>
       <% smoothie.reviews.forEach(function(r) { %>
         <% total += r.rating %>
@@ -107,17 +114,20 @@
 <% if (smoothie.user?._id.equals(user?._id)) {%>
   <form id="add-review-form" method="POST"
     action="/smoothies/<%= smoothie._id %>/reviews">
-    <label>Review:</label>
-    <textarea name="content"></textarea>
+    <div class="form-group">
+      <label>Review
+        <textarea name="content" class="form-control m-2"></textarea>
+      </label>
+    </div>
     <label>Rating:</label>
-    <select name="rating">
+    <select name="rating" class="form-control m-2" required>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5" selected>5</option>
     </select>
-    <input type="submit" value="Add Review">
+    <input type="submit" value="Add Review" class="btn btn-primary btn-sm m-2">
   </form>
 <% } %>
 

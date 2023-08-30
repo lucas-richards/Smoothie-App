@@ -66,7 +66,7 @@ header {
 /* start for items in index */
 #items-cont {
   width: 250px;
-  height: 320px;
+  height: 300px;
   transition: scale 0.5s;
   color: black;
   text-align: center;
@@ -79,12 +79,24 @@ header {
 
 #items-cont > img {
   height: 65%;
-  width: 80%;
+  width: 75%;
 }
 
 .flex-wrap > a {
   text-decoration: none;
 }
 
+#starImg {
+  max-height: 20px;
+  max-width: 20px;
+  border-radius: 0%;
+  margin: 0 3px 3px;
+}
+
 /* end for items in index */
+
+/* progress bar */
+.progress {
+  height: 5px;
+}
 
