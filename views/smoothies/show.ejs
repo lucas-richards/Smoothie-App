@@ -1,12 +1,22 @@
 
 <%- include('../partials/header') %>
-<div class="buttons">
-  <a href="/smoothies/<%= smoothie.id  %>/edit" class="btn btn-secondary btn-sm">Edit</a>
-  <a href="/smoothies/new" class="btn btn-danger btn-sm">Delete</a>  
-</div>
+<!-- Edit and delete buttons -->
+<% if (smoothie.user?._id.equals(user?._id)) {%>
+  <div class="buttons">
+    <a href="/smoothies/<%= smoothie.id  %>/edit" class="btn btn-secondary btn-sm">Edit</a>
+    <form action="/smoothies/<%= smoothie.id %>?_method=DELETE" method="POST" >
+      <button type="submit" class="btn btn-danger btn-sm d-inline">Delete</button>
+    </form> 
+  </div>
+<% } %>
 
+<header>
+  <h1><%= smoothie.name %></h1>
+  <% if (smoothie.user) {%>
+    <small>Created by <%= smoothie.user.name %></small>
+  <% } %>
+</header>
 
-<h1><%= smoothie.name %></h1>
 
 
 <div class="container">
@@ -68,6 +78,7 @@
     </div>
   </div>
 </div>
+<hr>
 <h2>Reviews</h2>
 
 <% if (smoothie.reviews.length) { %>
@@ -91,20 +102,24 @@
 <% } else { %>
   <p>No Reviews Yet</p>
 <% } %>
-<form id="add-review-form" method="POST"
-  action="/smoothies/<%= smoothie._id %>/reviews">
-  <label>Review:</label>
-  <textarea name="content"></textarea>
-  <label>Rating:</label>
-  <select name="rating">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5" selected>5</option>
-  </select>
-  <input type="submit" value="Add Review">
-</form>
+
+<!-- Leave a review form -->
+<% if (smoothie.user?._id.equals(user?._id)) {%>
+  <form id="add-review-form" method="POST"
+    action="/smoothies/<%= smoothie._id %>/reviews">
+    <label>Review:</label>
+    <textarea name="content"></textarea>
+    <label>Rating:</label>
+    <select name="rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected>5</option>
+    </select>
+    <input type="submit" value="Add Review">
+  </form>
+<% } %>
 
   
 

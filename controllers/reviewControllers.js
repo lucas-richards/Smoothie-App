@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Smoothie = require('../models/smoothie');
+const checkLogin = require('../config/ensureLoggedIn')
 
 module.exports = router
 
-router.delete('/reviews/:reviewId',function(req, res) {
+router.delete('/reviews/:reviewId', checkLogin, function(req, res) {
     // Note the cool "dot" syntax to query on the property of a subdoc
     console.log('delete route was hit')
     Smoothie.findOne({ 'reviews._id': req.params.reviewId, 'reviews.user': req.user._id })
@@ -21,7 +22,7 @@ router.delete('/reviews/:reviewId',function(req, res) {
     
 })
 
-router.post('/smoothies/:smoothieId/reviews', function (req, res) {
+router.post('/smoothies/:smoothieId/reviews', checkLogin, function (req, res) {
     // Add the user-centric info to req.body (the new review)
     req.body.user = req.user._id;
     req.body.userName = req.user.name;

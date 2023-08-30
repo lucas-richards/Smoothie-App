@@ -54,6 +54,12 @@ a > img {
 }
 
 .buttons {
-  text-align: end;
+  display: flex;
+  justify-content: end;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
 }
 

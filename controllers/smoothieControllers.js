@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Smoothie = require('../models/smoothie');
 const Ingredient = require('../models/ingredient');
+const checkLogin = require('../config/ensureLoggedIn')
 
 let ingArr = []
 let ingArrEdit = []
@@ -25,7 +26,7 @@ router.get('/', function(req, res) {
 
 
 
-router.post('/new', function(req,res) {
+router.post('/new', checkLogin, function(req,res) {
     const newIng = {}
     newIng.qty = req.body.qty 
     Ingredient.findById(req.body.ing)
@@ -44,7 +45,7 @@ router.post('/new', function(req,res) {
 
 
 // new
-router.get('/new', function(req, res) {
+router.get('/new', checkLogin, function(req, res) {
     Ingredient.find({}).sort('name')
     .then((ingredientDoc)=>{
         res.render('smoothies/new',{title:'New Smoothie', ingredients:ingredientDoc, ingArr});
@@ -89,7 +90,7 @@ router.get('/:smoothieId', function(req, res) {
 
 // create
 
-router.post('/', function(req, res) {
+router.post('/', checkLogin, function(req, res) {
     
     req.body.user = req.user._id
     console.log('this is my body',req.body)
@@ -111,7 +112,7 @@ router.post('/', function(req, res) {
 
 // edit
 
-router.get('/:smoothieId/edit', function(req,res){
+router.get('/:smoothieId/edit', checkLogin, function(req,res){
     Smoothie.findById(req.params.smoothieId).populate('ingredients.ing').exec()
         .then(smoothieDoc => {
             //if ingArrEdit is empty then assign the smoothie.ing value
@@ -140,7 +141,7 @@ router.get('/:smoothieId/edit', function(req,res){
 })
 
 //update edit page to show the new ingredient 
-router.patch('/:smoothieId/edit', function(req,res){
+router.patch('/:smoothieId/edit', checkLogin, function(req,res){
     Ingredient.findById(req.body.ing)
         .then( ingredientDoc => {
             const newIng = {}
@@ -157,7 +158,7 @@ router.patch('/:smoothieId/edit', function(req,res){
 })
 
 // EDIT PAGE - delete ingredient
-router.delete('/:smoothieId/edit/:ingArrEditIdx', function(req,res){
+router.delete('/:smoothieId/edit/:ingArrEditIdx', checkLogin, function(req,res){
     console.log('old ingArrEdit', ingArrEdit)
     ingArrEdit.splice(req.params.ingArrEditIdx,1)
     console.log('new ingArrEdit', ingArrEdit)
@@ -165,7 +166,7 @@ router.delete('/:smoothieId/edit/:ingArrEditIdx', function(req,res){
 })
 
 // update smoothie
-router.patch('/:smoothieId', function(req, res) {
+router.patch('/:smoothieId', checkLogin, function(req, res) {
     console.log('this is my req.body',req.body)
     Smoothie.findById(req.params.smoothieId)
         .then(smoothieDoc => {
@@ -186,7 +187,16 @@ router.patch('/:smoothieId', function(req, res) {
         })
         .catch(error => console.error)
 });
-// delete
+
+// delete smoothie
+router.delete('/:smoothieId', checkLogin, function(req,res){
+   Smoothie.deleteOne({_id:req.params.smoothieId})
+    .then(smoothieDoc => {
+        console.log('deleted smoothie', smoothieDoc)
+        res.redirect('/smoothies')
+    })
+    .catch(error => console.error)
+})
 
 
 module.exports = router;
