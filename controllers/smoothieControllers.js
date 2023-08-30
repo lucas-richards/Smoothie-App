@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
     //reset edit array smoothie
     ingArrEdit = []
     console.log('reset ingArrEdit')
-    Smoothie.find({}).populate('user')
+    Smoothie.find({}).populate('user').populate('reviews').populate('ingredients.ing')
         .then(smoothieDocs => {
             res.render('smoothies/index',{title:'Smoothies', smoothies:smoothieDocs});
         })
