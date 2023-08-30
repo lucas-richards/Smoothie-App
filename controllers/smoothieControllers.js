@@ -4,7 +4,9 @@ const Smoothie = require('../models/smoothie');
 const Ingredient = require('../models/ingredient');
 const checkLogin = require('../config/ensureLoggedIn')
 
+//array for the smoothies new page
 let ingArr = []
+//array for the smoothies edit page
 let ingArrEdit = []
 
 // index
@@ -56,6 +58,15 @@ router.get('/new', checkLogin, function(req, res) {
         return res.send('err creating - check terminal')
     })
 });
+
+// new delete
+router.delete('/new/:ingArrIdx', checkLogin, function(req,res){
+    console.log('old ingArr', ingArr)
+    console.log('this is the index', req.params.ingArrIdx)
+    ingArr.splice(req.params.ingArrIdx,1)
+    console.log('new ingArrEdit', ingArr)
+    res.redirect(`/smoothies/new`)
+})
 
 // show
 router.get('/:smoothieId', function(req, res) {
