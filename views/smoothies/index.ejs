@@ -19,7 +19,9 @@
             s.reviews.forEach(function(r) { 
             totalRating += r.rating 
           })%>
-          <h4><%= totalRating/s.reviews.length %></h4>
+          <h5>Rating: <%= Math.round(totalRating/s.reviews.length*10)/10 %></h5>
+        <% } else {%>
+          <h5>No reviews</h5>
         <% } %>
         <!-- end calculate total rating -->
         
