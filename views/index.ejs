@@ -1,11 +1,14 @@
 <%- include('./partials/header') %>
 
-  <% if (user) {%>
-      <p>Welcome back <%= user.name %></p>
-    <% } else { %>
-      <p>Welcome to <%= title %></p>
-  <% } %>
   
+  
+  <div id="index-container">
+    <% if (user) {%>
+      <h1>Welcome back <br> <%= user.name %></h1>
+    <% } else { %>
+      <h1><%= title %></h1>
+  <% } %>
+  </div>
 
 <%- include('./partials/footer') %>
 

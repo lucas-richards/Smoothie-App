@@ -5,13 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smoothies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Kanit:wght@300&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- style sheet -->
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
   <div id="page-container">
     <div id="content-wrap">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <nav class="navbar navbar-expand-md navbar-light bg-light ">
     <div class="container-fluid ">
       <a class="navbar-brand" href="/">
         <img src="/images/logo.png" alt="logo">
@@ -20,25 +25,19 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-          <li class="nav-item ">
-            <a class="nav-link" href="/smoothies">Smoothies</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/ingredients">Ingredients</a>
-          </li>
+        <a class="nav-link" href="/smoothies">Smoothies</a>
+        <a class="nav-link" href="/ingredients">Ingredients</a>
           <% if (user) {%>
-            <li class="nav-item">
+            <div id="log-cont">
               <a class="nav-link" href="/logout">LOG OUT</a>
-            </li>
-            <span><img src="<%= user.avatar %>" alt="avatar"></span>
+              <img src="<%= user.avatar %>" alt="avatar">
+            </div>
             <% } else { %>
-            <li class="nav-item">
-              <a href="/auth/google" class="nav-link">LOG IN</a>
-            </li>
-            <span><img src="https://i.imgur.com/FHjYyi0.png"></span>
+              <div id="log-cont">
+                <a href="/auth/google" class="nav-link">LOG IN </a>
+                <img src="https://i.imgur.com/FHjYyi0.png">
+              </div>
           <% } %>
-        </ul>
       </div>
     </div>
   </nav>

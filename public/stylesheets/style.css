@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 20px 'Caveat', sans-serif;
 }
 
 h1,p {
@@ -15,10 +15,6 @@ img {
 
 a {
   color: #00B7FF;
-}
-
-footer {
-  margin-top: auto;
 }
 
 a > img {
@@ -117,4 +113,55 @@ header {
   bottom: 0;
   width: 100%;
   height: 2.5rem;            /* Footer height */
+}
+
+/* home page gif*/
+
+#index-container {
+  background-image: url("/gifs/smoothies.gif");
+  background-color: #cccccc;
+  height: 800px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#index-container > h1 {
+  position: absolute;
+  background-color: white;
+  color: black;
+  width: 300px;
+  margin: 50px;
+  padding: 20px;
+
+}
+
+/* navigation bar */
+#log-cont {
+  border: solid thin gray;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  width: 150px;
+  color: black;
+}
+
+#navbarSupportedContent {
+  justify-content: end;
+}
+
+#navbarSupportedContent > a, #log-cont > a {
+  color: black;
+  opacity: 0.5;
+}
+
+#log-cont > a:hover {
+  opacity: 1;
+}
+
+#navbarSupportedContent > a:hover {
+  opacity: 1;
 }
