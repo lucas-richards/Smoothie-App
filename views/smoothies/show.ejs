@@ -46,10 +46,10 @@
                 <tr>
                     <td><%= ing.ing.name %></td> 
                     <td><%= ing.qty %></td> 
-                    <td><%= ing.ing.kcal %></td> 
-                    <td><%= ing.ing.protein %></td> 
-                    <td><%= ing.ing.carbs %></td> 
-                    <td><%= ing.ing.fat %></td> 
+                    <td><%= Math.round(ing.ing.kcal * ing.qty/100*10)/10 %></td> 
+                    <td><%= Math.round(ing.ing.protein * ing.qty/100*10)/10 %></td> 
+                    <td><%= Math.round(ing.ing.carbs * ing.qty/100*10)/10 %></td> 
+                    <td><%= Math.round(ing.ing.fat * ing.qty/100*10)/10 %></td> 
                 </tr>
                 
             <% }) %>
@@ -96,7 +96,7 @@
               <% if (user?._id.equals(r.user)) { %>
                 <div class="buttons">
                   <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST" >
-                    <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
+                    <button type="submit" class="btn btn-outline-dark btn-sm">X</button>
                   </form>
                 </div>
                 
@@ -104,7 +104,7 @@
               <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" >
               <%= r.userName %>
                - Rating: <%= r.rating %>
-              <div><%= r.content %></div>
+              <div class="m-3"><%= r.content %></div>
             </div>
             
       <% }); %>

@@ -31,23 +31,26 @@
         </thead>
         <tbody>
           <% if(ingArrEdit.length !== 0){ %>
+                
+
             <% ingArrEdit.forEach((ing,ingIdx) => { %>
+                 
                 <tr>
                     <td><%= ing.ing.name %></td> 
                     <td><%= ing.qty %></td> 
-                    <td><%= ing.ing.kcal %></td> 
-                    <td><%= ing.ing.protein %></td> 
-                    <td><%= ing.ing.carbs %></td> 
-                    <td><%= ing.ing.fat %></td> 
+                    <td><%= Math.round(ing.ing.kcal * ing.qty/100*10)/10 %></td> 
+                    <td><%= Math.round(ing.ing.protein * ing.qty/100*10)/10 %></td> 
+                    <td><%= Math.round(ing.ing.carbs * ing.qty/100*10)/10 %></td> 
+                    <td><%= Math.round(ing.ing.fat * ing.qty/100*10)/10 %></td> 
                     <td>
                       <form action="/smoothies/<%= smoothie.id %>/edit/<%= ingIdx %>?_method=DELETE" method="POST" >
                         <button type="submit">X</button>
                       </form>
                     </td>
                 </tr>
-                
             <% }) %>
           <% } %>
+              
         </tbody>
       </table>
       <!-- generate ingredients table -->
@@ -55,7 +58,6 @@
         <div class="form-group">
           <label>Ingredient
             <select name="ing" class="form-control m-2">
-              <!-- Emit an option for each performer -->
               <%- ingredients.map(ing => 
                 `<option value="${ing._id}">${ing.name}</option>`
               ).join('') %>

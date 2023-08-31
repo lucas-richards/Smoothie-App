@@ -11,7 +11,7 @@ let ingData = null
 // index
 router.get('/', function(req, res) {
     
-    Ingredient.find({})
+    Ingredient.find({}).sort('name')
         .then(nutrientsDocs => {
             res.render('ingredients/index', {
                 title:'Ingredients',
