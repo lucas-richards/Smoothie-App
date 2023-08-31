@@ -3,9 +3,9 @@
 <!-- Edit and delete buttons -->
 <% if (smoothie.user?._id.equals(user?._id)) {%>
   <div class="buttons">
-    <a href="/smoothies/<%= smoothie.id  %>/edit" class="btn btn-secondary btn-sm">Edit</a>
+    <a href="/smoothies/<%= smoothie.id  %>/edit" class="btn btn-secondary btn-sm m-1">Edit</a>
     <form action="/smoothies/<%= smoothie.id %>?_method=DELETE" method="POST" >
-      <button type="submit" class="btn btn-danger btn-sm d-inline">Delete</button>
+      <button type="submit" class="btn btn-danger btn-sm d-inline m-1">Delete</button>
     </form> 
   </div>
 <% } %>
@@ -83,7 +83,7 @@
 </h2>
 
 <% if (smoothie.reviews.length) { %>
-  <h5>
+  <h5 class="m-3">
     <%= Math.round(totalRating/smoothie.reviews.length*10)/10 %>
     <% for(let i=0; i < Math.round(totalRating/smoothie.reviews.length); i++){ %>
       <img id="starImg" src="/images/star.png" alt="star">
@@ -94,9 +94,12 @@
         <% total += r.rating %>
             <div class="shadow p-3 m-3 bg-body rounded">
               <% if (user?._id.equals(r.user)) { %>
-                <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST" >
-                  <button type="submit">X</button>
-                </form>
+                <div class="buttons">
+                  <form action="/reviews/<%= r._id %>?_method=DELETE" method="POST" >
+                    <button type="submit" class="btn btn-outline-danger btn-sm">X</button>
+                  </form>
+                </div>
+                
               <% } %>
               <img alt="avatar" src="<%= r.userAvatar %>" referrerpolicy="no-referrer" >
               <%= r.userName %>
@@ -112,23 +115,27 @@
 
 <!-- Leave a review form -->
 <% if (smoothie.user?._id.equals(user?._id)) {%>
-  <form id="add-review-form" method="POST"
+  <div class="shadow p-3 m-3 bg-body rounded">
+    <form id="add-review-form" method="POST"
     action="/smoothies/<%= smoothie._id %>/reviews">
-    <div class="form-group">
-      <label>Review
-        <textarea name="content" class="form-control m-2"></textarea>
-      </label>
-    </div>
-    <label>Rating:</label>
-    <select name="rating" class="form-control m-2" required>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5" selected>5</option>
-    </select>
-    <input type="submit" value="Add Review" class="btn btn-primary btn-sm m-2">
-  </form>
+      <div class="mb-3">
+        <label class="form-label">Rating:</label>
+        <select name="rating" class="form-control" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5" selected>5</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Review</label>
+        <textarea name="content" rows="3" class="form-control" ></textarea>
+      </div>
+      <input type="submit" value="Add Review"  class="btn btn-primary btn-sm">
+    </form>
+  </div>
+  
 <% } %>
 
   

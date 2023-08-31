@@ -5,12 +5,14 @@
   <a href="/smoothies/new" class="btn btn-primary m-2">New Smoothie</a>
 </div>
 
+<h1><%= title %></h1>
+
 <div class="d-flex flex-wrap justify-content-center">
   <% smoothies.forEach( s => { %>
     <a href="/smoothies/<%= s.id  %>">
     <div id="items-cont" class="shadow p-3 m-3 bg-body rounded">
-        <h3><%= s.name %></h3>
-        <small>by <%= s.user.name %></small><br>
+        <h3 class="text-truncate"><%= s.name %></h3>
+        <small class="text-truncate">by <%= s.user.name %></small><br>
         <% if (s.image) { %>
           <img src="<%= s.image %>" alt="item image" class="rounded mx-auto d-block">
         <% } else { %>

@@ -1,6 +1,6 @@
 <%- include('../partials/header') %>
 <div class="buttons">
-  <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-secondary btn-sm">Edit</a>  
+  <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-secondary btn-sm m-2">Edit</a>  
 </div>
 
 <h1><%= ingredient.name %></h1>
@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col m-4 ">
       <div class="text-center">
-        <h4><%= ingredient.kcal %> Cal</h4>
+        <h4 class="fw-bold"><%= ingredient.kcal %> Cal</h4>
         <% if (ingredient.image) { %>
           <img id="img-ing" src="<%= ingredient.image %>" alt="ingredient image">
         <% } else { %>
@@ -30,8 +30,8 @@
       </ul>
     </div>
     <div class="col m-4">
-      <h5>Properties</h5>
-      <p><%= ingredient.properties %></p>
+      <h5 class="fw-bold" >Properties:</h5>
+      <p style="" class="text-start" ><%= ingredient.properties %></p>
     </div>
   </div>
   <h4 class="mt-3">These are the smoothies using <%= ingredient.name %></h4>

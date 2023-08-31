@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Ingredient = require('../models/ingredient');
 const checkLogin = require('../config/ensureLoggedIn')
-const axios = require('axios')
+
 
 const ROOT_URL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${process.env.APP_ID}&app_key=${process.env.APP_KEY}`
 let ingData = null

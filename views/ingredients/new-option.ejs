@@ -1,11 +1,13 @@
 <%- include('../partials/header') %>
 
+<h1><%= title %></h1>
+
 <div class="container">
   <div class="row">
     <div class="col-7 m-4 text-center">
       <h3>Option 1</h3>
       <h4>Search for Ingredient</h4>
-      <form action="/ingredients/new-option" method="post" class="form-inline">
+      <form action="/ingredients/new-option" method="post" class="d-flex">
         <input name="ing" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>

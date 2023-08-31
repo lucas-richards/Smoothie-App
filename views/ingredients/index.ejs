@@ -1,6 +1,11 @@
 <%- include('../partials/header') %>
+
+<div class="buttons">
+  <a href="/ingredients/new-option" class="btn btn-primary m-2">New Ingredient</a>
+</div>
+
 <div class="container-md">
-  <p>Welcome to <%= title %></p>
+  <h1><%= title %></h1>
 </div>
 
 <div class="d-flex flex-wrap justify-content-center">
@@ -36,10 +41,6 @@
   <% }) %>
 </div>
   
-
-
-
-<a href="/ingredients/new-option">New Ingredient</a>
   
 
 <%- include('../partials/footer') %>

@@ -36,6 +36,8 @@ a detailed list of the functionality of your application, told through a user's 
 
 # Getting Started
 
+Before running ```nodemon``` to run the server, configure the app:
+
 clone repository and run npm i to install all dependecies.
 Add the following env variables:
 
