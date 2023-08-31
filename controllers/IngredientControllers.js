@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Ingredient = require('../models/ingredient');
+const Smoothie = require('../models/smoothie');
 const checkLogin = require('../config/ensureLoggedIn')
 
 
@@ -55,8 +56,12 @@ router.get('/new', checkLogin, function(req, res) {
 router.get('/:idIngredient', function(req, res) {
     Ingredient.findById(req.params.idIngredient)
         .then(ingredientDoc => {
-            const total = ingredientDoc.protein + ingredientDoc.carbs + ingredientDoc.fat
-            res.render('ingredients/show',{title:'', ingredient:ingredientDoc, total});
+            Smoothie.find({ 'ingredients.ing':req.params.idIngredient}).populate('ingredients.ing')
+                .then(smoothieDocs => {
+                    console.log('these are smoothies',smoothieDocs)
+                    const total = ingredientDoc.protein + ingredientDoc.carbs + ingredientDoc.fat
+                    res.render('ingredients/show',{title:'', ingredient:ingredientDoc, total, smoothies:smoothieDocs});
+                })
         })
         .catch(err => {
             console.log('==============err==================')

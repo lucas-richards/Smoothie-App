@@ -24,9 +24,9 @@
         <div class="progress-bar bg-danger" role="progressbar" style="width: <%= ingredient.fat/total*100 %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <ul class="list-pcf mt-3">
-        <li class="m-1">Protein: <%= ingredient.protein %></li>
-        <li class="m-1">Carbs: <%= ingredient.carbs %></li>
-        <li class="m-1">Fat: <%= ingredient.fat %></li>
+        <li class="m-1">Protein: <%= ingredient.protein %> %</li>
+        <li class="m-1">Carbs: <%= ingredient.carbs %> %</li>
+        <li class="m-1">Fat: <%= ingredient.fat %> %</li>
       </ul>
     </div>
     <div class="col m-4">
@@ -37,7 +37,67 @@
   <h4 class="mt-3">These are the smoothies using <%= ingredient.name %></h4>
 </div>
 
+<div class="d-flex flex-wrap justify-content-center">
+  <% smoothies.forEach( s => { %>
+    <a href="/smoothies/<%= s.id  %>">
+    <div id="items-cont" class="shadow p-3 m-3 bg-body rounded">
+        <h3 class="text-truncate"><%= s.name %></h3>
+        <small class="text-truncate">by <%= s.user.name %></small><br>
+        <% if (s.image) { %>
+          <img src="<%= s.image %>" alt="item image" class="rounded mx-auto d-block">
+        <% } else { %>
+          <img src="/images/comingsoon.jpeg" alt="comingsoon image">
+        <% } %>
+        <!-- start calculate total rating -->
+        <% if(s.reviews.length) {%>
+          <%let totalRating = 0 
+            s.reviews.forEach(function(r) { 
+            totalRating += r.rating 
+          })%>
+          <h6>
+             <!-- if rating number needed Math.round(totalRating/s.reviews.length*10)/10  -->
+            <% for(let i=0; i < Math.round(totalRating/s.reviews.length); i++){ %>
+              <img id="starImg" src="/images/star.png" alt="star">
+            <% } %>
+          </h6>
+          
+        <% } else {%>
+          <h5>No reviews</h5>
+        <% } %>
+        <!-- end calculate total rating -->
+        
+        <!-- start calculate nutrition bar -->
+        <% if(s.ingredients.length) {
+            let totalKcal = 0
+            let totalP = 0
+            let totalC = 0
+            let totalF = 0
+            s.ingredients.forEach(ing => {
+              totalKcal += ing.ing.kcal
+              totalP += ing.ing.protein
+              totalC += ing.ing.carbs
+              totalF += ing.ing.fat
+            })
+            
+            const total = totalP + totalC + totalF 
+            const protPerc = Math.ceil(totalP/total*100)
+            const carbPerc = Math.ceil(totalC/total*100)
+            const fatPerc = Math.ceil(totalF/total*100)
+          %>
+          
 
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: <%= protPerc %>%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-warning" role="progressbar" style="width: <%= carbPerc %>%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: <%= fatPerc %>%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        <% } %>
+        
+      
+    </div>
+    </a>
+  <% }) %>
+</div>
 
 
   
