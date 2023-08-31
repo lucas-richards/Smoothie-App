@@ -4,9 +4,12 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-7 m-4 text-center">
+    <div class="col m-4 text-center">
       <h3>Option 1</h3>
-      <h4>Search for Ingredient</h4>
+      <a href="/ingredients/new" class="btn btn-outline-success my-2 my-sm-0">Enter Info</a>
+    </div>
+    <div class="col m-4 text-center">
+      <h3>Option 2</h3>
       <form action="/ingredients/new-option" method="post" class="d-flex">
         <input name="ing" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -46,11 +49,8 @@
         </div>
       <% } %>
     </div>
-    <div class="col m-4 text-center">
-      <h3>Option 2</h3>
-      <h4>Enter information Manually</h4>
-      <a href="/ingredients/new">Enter Info</a>
-    </div>
+    
+    
   </div>
 </div>
   
