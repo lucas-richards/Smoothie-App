@@ -4,15 +4,16 @@
 
 <div class="container">
   <div class="row">
-    <div class="col m-4 text-center">
+    <div class="col-sm-5 mt-4 text-center">
       <h3>Option 1</h3>
       <a href="/ingredients/new" class="btn btn-outline-success my-2 my-sm-0">Enter Info</a>
     </div>
-    <div class="col m-4 text-center">
+  
+    <div class="col mt-4 text-center">
       <h3>Option 2</h3>
       <form action="/ingredients/new-option" method="post" class="d-flex">
         <input name="ing" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-outline-success mr-2 my-sm-0" type="submit">Search</button>
       </form>
       <% if(ingData) {%>
         <div class="d-flex flex-wrap justify-content-center">
