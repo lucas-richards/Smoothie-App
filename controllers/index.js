@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 });
 
 // Google OAuth login route
-router.get('/auth/google', passport.authenticate(
+router.get('/auth/google' ,passport.authenticate(
   // Which passport strategy is being used?
   'google',
   {
@@ -31,7 +31,8 @@ router.get('/oauth2callback', passport.authenticate(
 // OAuth logout route
 router.get('/logout', function(req, res){
   req.logout(function() {
-    res.redirect('/');
+    
+    res.redirect('back');
   });
 });
 

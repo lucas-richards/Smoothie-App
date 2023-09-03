@@ -1,7 +1,10 @@
 <%- include('../partials/header') %>
-<div class="buttons">
-  <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-secondary btn-sm m-2">Edit</a>  
-</div>
+
+<% if (ingredient.user?._id.equals(user?._id)) {%>
+  <div class="buttons">
+    <a href="/ingredients/<%= ingredient.id %>/edit" class="btn btn-secondary btn-sm m-2">Edit</a>  
+  </div>
+  <% } %>
 
 <h1><%= ingredient.name %></h1>
 
