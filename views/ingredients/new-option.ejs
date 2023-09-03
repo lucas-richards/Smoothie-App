@@ -18,7 +18,7 @@
       <% if(ingData) {%>
         <div class="d-flex flex-wrap justify-content-center">
           <% ingData.hints.forEach((ing,ingIdx) => {%>
-            <a href="/ingredients/new-search">
+            <a href="/ingredients/new-search/<%= ingIdx  %>">
               <div id="items-cont" class="shadow p-3 m-3 bg-body rounded">
                 <h3 class="text-truncate"><%= ing.food.label %></h3>
                 <h6 class="d-inline"><%= Math.ceil(ing.food.nutrients.ENERC_KCAL) %> Cal</h6><small> (100g)</small>

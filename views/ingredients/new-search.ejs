@@ -4,11 +4,11 @@
 <form action="/ingredients" method="POST">
   <div class="form-group mb-3">
     <label>Name</label>
-    <input name="name" value="<%= ingData.parsed[0].food.label %>" type="text" class="form-control">
+    <input name="name" value="<%= ingData.food.label %>" type="text" class="form-control">
   </div>
   <div class="form-group mb-3">
     <label>Properties</label>
-    <textarea name="properties" value="<%= ingData.parsed[0].food.label %>" class="form-control" aria-label="With textarea"></textarea>
+    <textarea name="properties" value="<%= ingData.food.label %>" class="form-control" aria-label="With textarea"></textarea>
   </div>
   <div class="form-group mb-3">
     <label>Serving Size</label>
@@ -22,25 +22,25 @@
     <div class="card-body p-3">
         <div class="form-group mb-2">
           <label>Calories</label>
-          <input name="kcal" value="<%= ingData.parsed[0].food.nutrients.ENERC_KCAL %>" type="number" class="form-control" placeholder="KCalories/100grs">
+          <input name="kcal" value="<%= ingData.food.nutrients.ENERC_KCAL %>" type="number" class="form-control" placeholder="KCalories/100grs">
         </div>
         <div class="form-group mb-2">
             <label>Protein</label>
-            <input name="protein" value="<%= ingData.parsed[0].food.nutrients.PROCNT %>" type="number" class="form-control" placeholder="Protein/100grs">
+            <input name="protein" value="<%= ingData.food.nutrients.PROCNT %>" type="number" class="form-control" placeholder="Protein/100grs">
         </div>
         <div class="form-group mb-2">
             <label>Carbohydrates</label>
-            <input name="carbs" value="<%= ingData.parsed[0].food.nutrients.CHOCDF %>" type="number" class="form-control" placeholder="Carbohydrates/100grs">
+            <input name="carbs" value="<%= ingData.food.nutrients.CHOCDF %>" type="number" class="form-control" placeholder="Carbohydrates/100grs">
         </div>
         <div class="form-group mb-2">
             <label>Fat</label>
-            <input name="fat" value="<%= ingData.parsed[0].food.nutrients.FAT %>" type="Number" class="form-control" placeholder="Fat/100grs">
+            <input name="fat" value="<%= ingData.food.nutrients.FAT %>" type="Number" class="form-control" placeholder="Fat/100grs">
         </div>
     </div>
   </div>
   <div class="form-group mt-2">
     <label>Image</label>
-    <input name="image" value="<%= ingData.parsed[0].food.image %>" type="text" class="form-control">
+    <input name="image" value="<%= ingData.food.image %>" type="text" class="form-control">
   </div>
   <button type="submit" class="btn btn-primary m-2">Save Ingredient</button>
 </form>

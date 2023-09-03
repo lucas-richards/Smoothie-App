@@ -42,10 +42,15 @@ router.post('/new-option', checkLogin, async function(req, res) {
 });
 
 // Search bar for new item 
-router.get('/new-search', function(req, res) {
-    res.render('ingredients/new-search',{title:'Confirm data', ingData});
-});
+// router.get('/new-search', function(req, res) {
+//     res.render('ingredients/new-search',{title:'Confirm data', ingData});
+// });
 
+// Edit for new ingredient
+router.get('/new-search/:ingredientIndex', function(req, res) {
+    console.log('this is the item selected',ingData.hints[req.params.ingredientIndex])
+    res.render('ingredients/new-search',{title:'Confirm data', ingData:ingData.hints[req.params.ingredientIndex]});
+});
 
 // new
 router.get('/new', checkLogin, function(req, res) {
