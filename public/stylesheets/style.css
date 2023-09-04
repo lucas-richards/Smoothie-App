@@ -1,9 +1,9 @@
 body {
   /* padding: 20px; */
-  font: 20px 'Caveat', sans-serif;
+  font: 18px 'Quicksand', sans-serif;
 }
 
-h1,p {
+h1,h2,p {
   text-align: center;
   margin: 10px;
 }

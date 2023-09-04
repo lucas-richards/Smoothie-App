@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
     Ingredient.find({}).sort('name')
         .then(nutrientsDocs => {
             res.render('ingredients/index', {
-                title:'Ingredients',
+                title:'INGREDIENTS',
                 ingredients: nutrientsDocs,
             })
         })

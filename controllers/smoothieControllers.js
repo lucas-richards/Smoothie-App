@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
     
     Smoothie.find({}).populate('user').populate('reviews').populate('ingredients.ing')
         .then(smoothieDocs => {
-            res.render('smoothies/index',{title:'Smoothies', smoothies:smoothieDocs});
+            res.render('smoothies/index',{title:'SMOOTHIES', smoothies:smoothieDocs});
         })
         .catch(err => {
             console.log('==============err==================')
