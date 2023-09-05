@@ -51,7 +51,7 @@ GOOGLE_CALLBACK=http://localhost:3000/oauth2callback
 
 SECRET=
 
-[Take me to the Smoothie App]('https://smoothieapp.fly.dev')
+[Take me to the Smoothie App](https://smoothieapp.fly.dev)
 
 ## Routing
 
