@@ -114,7 +114,7 @@
 <% } %>
 
 <!-- Leave a review form -->
-<% if (smoothie.user?._id.equals(user?._id)) {%>
+<% if (smoothie.user) {%>
   <div class="shadow p-3 m-3 bg-body rounded">
     <form id="add-review-form" method="POST"
     action="/smoothies/<%= smoothie._id %>/reviews">

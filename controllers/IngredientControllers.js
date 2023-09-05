@@ -61,7 +61,7 @@ router.get('/new', checkLogin, function(req, res) {
 router.get('/:idIngredient', function(req, res) {
     Ingredient.findById(req.params.idIngredient)
         .then(ingredientDoc => {
-            Smoothie.find({ 'ingredients.ing':req.params.idIngredient}).populate('ingredients.ing')
+            Smoothie.find({ 'ingredients.ing':req.params.idIngredient}).populate('ingredients.ing').populate('user')
                 .then(smoothieDocs => {
                     console.log('these are smoothies',smoothieDocs)
                     const total = ingredientDoc.protein + ingredientDoc.carbs + ingredientDoc.fat
