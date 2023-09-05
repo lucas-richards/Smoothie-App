@@ -1,7 +1,7 @@
 ## Smoothies App
 
 ## Overview
-a brief description of your application
+Smoothies App allows you to create your own smoothie and share it with the world. 
 
 ![alt text](public/images/wireframes/index_smoothie.png)
 
@@ -39,6 +39,7 @@ a detailed list of the functionality of your application, told through a user's 
 Before running ```nodemon``` to run the server, configure the app:
 
 clone repository and run npm i to install all dependecies.
+
 Add the following env variables:
 
 DATABASE_URL=
@@ -50,8 +51,7 @@ GOOGLE_CALLBACK=http://localhost:3000/oauth2callback
 
 SECRET=
 
-[Click to View Project Planning](your Trello url here)
-[Click to Play Connect Four!](your deployment url here)
+[Take me to the Smoothie App]('https://smoothieapp.fly.dev')
 
 ## Routing
 
@@ -101,5 +101,5 @@ diagrams that describe the relationships between your resources
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+- Future enhancement one: button to upload image
+- Future enhancement two: do not redirect if you log in.
