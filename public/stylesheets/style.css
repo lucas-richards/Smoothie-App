@@ -128,14 +128,15 @@ header {
 }
 
 #index-container > h1 {
-  position: absolute;
+  font-weight:bold;
   background-color: white;
   color: black;
   width: 300px;
-  margin: 50px;
+  margin:  auto;
   padding: 20px;
 
 }
+
 
 /* navigation bar */
 #log-cont {
