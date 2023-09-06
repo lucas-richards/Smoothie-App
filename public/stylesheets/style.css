@@ -131,7 +131,7 @@ header {
   font-weight:bold;
   background-color: white;
   color: black;
-  width: 400px;
+  max-width: 400px;
   margin:  auto;
   padding: 20px;
 

@@ -33,6 +33,7 @@ a detailed list of the functionality of your application, told through a user's 
 - Mongoose
 - Express
 - OAuth Google
+- API (Ingredients DataBase)
 
 # Getting Started
 
