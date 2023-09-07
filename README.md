@@ -104,3 +104,4 @@ diagrams that describe the relationships between your resources
 
 - Future enhancement one: button to upload image
 - Future enhancement two: do not redirect if you log in.
+- Future enhancement three: search button in edit and new smoothie
