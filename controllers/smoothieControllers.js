@@ -3,6 +3,8 @@ const router = express.Router();
 const Smoothie = require('../models/smoothie');
 const Ingredient = require('../models/ingredient');
 const checkLogin = require('../config/ensureLoggedIn')
+// const multer  = require('multer')
+// const upload = multer({ dest: 'public/images/' })
 
 //array for the smoothies new page
 let ingArr = []
@@ -115,6 +117,7 @@ router.post('/', checkLogin, function(req, res) {
         .then(smoothieDoc => {
             ingArr.forEach((ing) => {
                 smoothieDoc.ingredients.push(ing)
+                console.log('new smoothie',smoothieDoc)
             })
             smoothieDoc.save();
             ingArr = []

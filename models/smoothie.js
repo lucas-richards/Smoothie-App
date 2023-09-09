@@ -40,7 +40,7 @@ const smoothieSchema = new Schema({
         }
     }],
     reviews: [reviewSchema],
-    image:String
+    image: String
     
     }, {
     timestamps: true
